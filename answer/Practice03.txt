@@ -1,0 +1,200 @@
+#include <stdio.h>
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    // 定义变量及数组，n-销售额个数，a-销售额
+    int n, a[30], i;
+
+    // 输入销售额数量，n <= 30
+    cin >> n;
+
+    // 输入n个销售额，分别存入a[0]到a[n-1]
+    for(i = 0; i < n; i++)
+        cin >> a[i];
+
+    // 请在此添加代码，计算并输出销售额的波动情况
+    /********** Begin *********/
+for(i = 1; i < n; i++)
+{
+    if(i == 1)
+        cout << a[i] - a[i-1];
+    else
+        cout << " " << a[i] - a[i-1];
+}
+if(n > 1)
+    cout << endl;
+
+    /********** End **********/
+
+    return 0;
+}
+
+
+
+
+
+#include <iostream>
+using namespace std;
+
+// 函数silly：计算数值有多二
+// 参数：a-存储数值的字符数组，以'\0'结束，所以不需要另一个参数告诉函数数组有多长
+// 返回值：数值犯二的程度
+double silly(char a[]);
+
+int main()
+{
+    // 定义存储数值的数组
+    char s[102];
+
+    // 输入不超过100位的整数
+    cin >> s;
+
+    // 计算犯二的程度
+    double sy = silly(s);
+
+    // 输出犯二的程度
+    cout << sy << endl;
+
+    return 0;
+}
+
+double silly(char a[])
+{
+    /********** Begin *********/
+    int i = 0;
+    int count2 = 0;   // '2' 的个数
+    int len = 0;      // 有效数字位数
+    bool isNegative = false;
+
+    // 判断是否为负数
+    if (a[0] == '-')
+    {
+        isNegative = true;
+        i = 1;  // 跳过负号
+    }
+
+    // 统计长度并统计数字 '2' 个数
+    for (; a[i] != '\0'; i++)
+    {
+        if (a[i] == '2')
+            count2++;
+        len++;
+    }
+
+    // 计算基础程度
+    double level = (double)count2 / len;
+
+    // 若是负数 ×1.5
+    if (isNegative)
+        level *= 1.5;
+
+    // 判断是否偶数（看最后一位有效字符）
+    char last = a[(isNegative ? 1 : 0) + len - 1];
+    if (last == '0' || last == '2' || last == '4' || last == '6' || last == '8')
+        level *= 2;
+
+    return level;
+    /********** End **********/
+}
+
+
+
+
+
+
+// 请在此添加代码，写完成upvote.cpp文件
+/********** Begin *********/
+#include <iostream>
+using namespace std;
+
+int main() {
+    int N;
+    cin >> N;                 // 点赞文章数量
+
+    int cnt[1001] = {0};      // 统计每个标签出现次数，标签范围 1~1000
+
+    for (int i = 0; i < N; i++) {
+        int k;
+        cin >> k;             // 当前文章标签数
+        for (int j = 0; j < k; j++) {
+            int tag;
+            cin >> tag;       // 标签编号
+            if (tag >= 1 && tag <= 1000) {
+                cnt[tag]++;   // 统计次数
+            }
+        }
+    }
+
+    int bestTag = 0;          // 出现次数最多的标签
+    int bestCnt = 0;          // 该标签出现次数
+
+    // 找出现次数最多的标签；并列时取编号最大的
+    for (int tag = 1; tag <= 1000; tag++) {
+        if (cnt[tag] > bestCnt || (cnt[tag] == bestCnt && tag > bestTag)) {
+            bestTag = tag;
+            bestCnt = cnt[tag];
+        }
+    }
+
+    cout << bestTag << " " << bestCnt << endl;
+    return 0;
+}
+
+
+/********** End **********/
+
+
+
+
+
+#include<iostream>
+#include<fstream>
+
+int N=10;
+
+int unique_num(int array[])
+{
+  /**********Program**********/
+  int count_unique = 0;
+
+  for (int i = 0; i < N; i++)
+  {
+      int cnt = 0;
+      for (int j = 0; j < N; j++)
+      {
+          if (array[i] == array[j])
+              cnt++;
+      }
+      if (cnt == 1)
+          count_unique++;
+  }
+
+  return count_unique;
+  /**********  End  **********/
+}
+
+
+
+
+
+int sum_right_corner(int a[][4])
+{
+/**********Program**********/
+    int sum = 0;
+
+    // 主对角线右上方元素：列 j > 行 i
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = i + 1; j < 4; j++)
+        {
+            sum += a[i][j];
+        }
+    }
+
+    return sum;
+/**********  End  **********/
+}
+
+
